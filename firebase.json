@@ -1,3 +1,6 @@
+/*
+暂不清楚为何要配置firebase。。。
+*/
 {
   "hosting": {
     "public": "dist",

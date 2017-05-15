@@ -1,3 +1,7 @@
+/*
+protractorUI测试
+暂时无用
+*/
 /**
  * @author: @AngularClass
  */

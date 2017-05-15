@@ -1,3 +1,8 @@
+/*
+karma测试
+无视无用
+*/
+
 /**
  * @author: @AngularClass
  */
