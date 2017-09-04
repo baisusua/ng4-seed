@@ -1,4 +1,5 @@
-/**
+/*
+ * Webpack 公共配置部分
  * @author: @AngularClass
  */
 
@@ -6,11 +7,11 @@ const webpack = require('webpack');
 const helpers = require('./helpers');
 
 /**
- * Webpack Plugins
+ * Webpack 插件
  *
  * problem with copy-webpack-plugin
  */
-const AssetsPlugin = require('assets-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin'); 
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
@@ -24,40 +25,44 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
 
 /**
- * Webpack Constants
+ * Webpack 常量配置
  */
-const HMR = helpers.hasProcessFlag('hot');
-const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
+const HMR = helpers.hasProcessFlag('hot');  /*是否启用HMR*/
+const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot'); /*是否启用AOT模式*/
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'New Angular2-spa-seed',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR
 };
 
 /**
- * Webpack configuration
+ * Webpack 参数配置
  *
- * See: http://webpack.github.io/docs/configuration.html#cli
+ * 参考文档: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
+
+  /**
+   *  判断是否是生产模式
+   */
+
   isProd = options.env === 'production';
   return {
 
     /**
-     * Cache generated modules and chunks to improve performance for multiple incremental builds.
-     * This is enabled by default in watch mode.
-     * You can pass false to disable it.
+     * 缓存生成的模块和块，提高构建性能。.
+     * watch监听模式默认开启.
      *
-     * See: http://webpack.github.io/docs/configuration.html#cache
+     * 参考文档: http://webpack.github.io/docs/configuration.html#cache
      */
     //cache: false,
 
     /**
-     * The entry point for the bundle
-     * Our Angular.js app
-     *
-     * See: http://webpack.github.io/docs/configuration.html#entry
+     * main 入口文件
+     * polyfills 垫片(项目公共库)
+     * 
+     * 参考文档: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: {
 
@@ -68,47 +73,46 @@ module.exports = function (options) {
     },
 
     /**
-     * Options affecting the resolving of modules.
+     * 文件类型配置
      *
-     * See: http://webpack.github.io/docs/configuration.html#resolve
+     * 参考文档: http://webpack.github.io/docs/configuration.html#resolve
      */
     resolve: {
 
       /**
-       * An array of extensions that should be used to resolve modules.
+       * 哪些后缀文件需要处理.
        *
-       * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
+       * 参考文档: http://webpack.github.io/docs/configuration.html#resolve-extensions
        */
       extensions: ['.ts', '.js', '.json'],
 
       /**
-       * An array of directory names to be resolved to the current directory
+       * 要解析到当前目录的目录名称数组(类似快捷方式)
        */
       modules: [helpers.root('src'), helpers.root('node_modules')],
 
     },
 
     /**
-     * Options affecting the normal modules.
+     * loder配置.
      *
-     * See: http://webpack.github.io/docs/configuration.html#module
+     * 参考文档: http://webpack.github.io/docs/configuration.html#module
      */
     module: {
 
       rules: [
 
         /**
-         * Typescript loader support for .ts
+         * 解析.ts文件
          *
-         * Component Template/Style integration using `angular2-template-loader`
-         * Angular 2 lazy loading (async routes) via `ng-router-loader`
+         * Template(html)/Style(css)  要使用 `angular2-template-loader`处理
+         * Angular 2 lazy loading (async routes) 要使用 `ng-router-loader`处理
          *
-         * `ng-router-loader` expects vanilla JavaScript code, not TypeScript code. This is why the
-         * order of the loader matter.
+         * `ng-router-loader` 必须使用js而不是typescript
          *
-         * See: https://github.com/s-panferov/awesome-typescript-loader
-         * See: https://github.com/TheLarkInn/angular2-template-loader
-         * See: https://github.com/shlomiassaf/ng-router-loader
+         * 参考文档: https://github.com/s-panferov/awesome-typescript-loader
+         * 参考文档: https://github.com/TheLarkInn/angular2-template-loader
+         * 参考文档: https://github.com/shlomiassaf/ng-router-loader
          */
         {
           test: /\.ts$/,
@@ -122,7 +126,7 @@ module.exports = function (options) {
             },
             {
               /**
-               *  MAKE SURE TO CHAIN VANILLA JS CODE, I.E. TS COMPILATION OUTPUT.
+               *  确保输出的是js而不是typescript
                */
               loader: 'ng-router-loader',
               options: {
@@ -146,9 +150,9 @@ module.exports = function (options) {
         },
 
         /**
-         * Json loader support for *.json files.
+         * 解析json文件.
          *
-         * See: https://github.com/webpack/json-loader
+         * 参考文档: https://github.com/webpack/json-loader
          */
         {
           test: /\.json$/,
@@ -156,8 +160,8 @@ module.exports = function (options) {
         },
 
         /**
-         * To string and css loader support for *.css files (from Angular components)
-         * Returns file content as string
+         * 解析css文件
+         * 将css转为字符串输出
          *
          */
         {
@@ -167,8 +171,8 @@ module.exports = function (options) {
         },
 
         /**
-         * To string and sass loader support for *.scss files (from Angular components)
-         * Returns compiled css content as string
+         * 解析scss文件
+         * 将scss转为字符串输出
          *
          */
         {
@@ -178,8 +182,8 @@ module.exports = function (options) {
         },
 
         /**
-         * Raw loader support for *.html
-         * Returns file content as string
+         * 解析html文件
+         * 将html转为字符串输出
          *
          * See: https://github.com/webpack/raw-loader
          */
@@ -190,17 +194,17 @@ module.exports = function (options) {
         },
 
         /**
-         * File loader for supporting images, for example, in CSS files.
+         * 处理图片
          */
         {
-          test: /\.(jpg|png|gif)$/,
+          test: /\.(jpg|png|gif|svg)$/,
           use: 'file-loader'
         },
 
-        /* File loader for supporting fonts, for example, in CSS files.
+        /* 处理字体
         */
         {
-          test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+          test: /\.(eot|woff2?|ttf)([\?]?.*)$/,
           use: 'file-loader'
         }
 
@@ -209,11 +213,18 @@ module.exports = function (options) {
     },
 
     /**
-     * Add additional plugins to the compiler.
+     * 添加滤镜.
      *
-     * See: http://webpack.github.io/docs/configuration.html#plugins
+     * 文档参考: http://webpack.github.io/docs/configuration.html#plugins
      */
     plugins: [
+      /**
+       * Plugin: AssetsPlugin
+       * 添加静态资源(主要是dll文件)
+       *
+       * 文档参考: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
+       */
+
       new AssetsPlugin({
         path: helpers.root('dist'),
         filename: 'webpack-assets.json',
@@ -222,25 +233,24 @@ module.exports = function (options) {
 
       /**
        * Plugin: ForkCheckerPlugin
-       * Description: Do type checking in a separate process, so webpack don't need to wait.
+       * 单独进行类型检查，避免webpack一直等待.
        *
-       * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
+       * 文档参考: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
       new CheckerPlugin(),
       /**
        * Plugin: CommonsChunkPlugin
-       * Description: Shares common code between the pages.
-       * It identifies common modules and put them into a commons chunk.
+       * 分块插件。。。
        *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-       * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
+       * 文档参考: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
+       * 文档参考: https://github.com/webpack/docs/wiki/optimization#multi-page-app
        */
       new CommonsChunkPlugin({
         name: 'polyfills',
         chunks: ['polyfills']
       }),
       /**
-       * This enables tree shaking of the vendor modules
+       * 构建vendor模块
        */
       new CommonsChunkPlugin({
         name: 'vendor',
@@ -248,7 +258,7 @@ module.exports = function (options) {
         minChunks: module => /node_modules/.test(module.resource)
       }),
       /**
-       * Specify the correct order the scripts will be injected in
+       * vendor与polyfills引入顺序
        */
       new CommonsChunkPlugin({
         name: ['polyfills', 'vendor'].reverse()
@@ -260,10 +270,10 @@ module.exports = function (options) {
 
       /**
        * Plugin: ContextReplacementPlugin
-       * Description: Provides context to Angular's use of System.import
+       * Angular 必须的
        *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-       * See: https://github.com/angular/angular/issues/11580
+       * 文档参考: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+       * 文档参考: https://github.com/angular/angular/issues/11580
        */
       new ContextReplacementPlugin(
         /**
@@ -280,11 +290,9 @@ module.exports = function (options) {
 
       /**
        * Plugin: CopyWebpackPlugin
-       * Description: Copy files and directories in webpack.
+       * 引入静态资源
        *
-       * Copies project static assets.
-       *
-       * See: https://www.npmjs.com/package/copy-webpack-plugin
+       * 文档参考: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
         { from: 'src/assets', to: 'assets' },
@@ -296,11 +304,9 @@ module.exports = function (options) {
 
       /**
        * Plugin: HtmlWebpackPlugin
-       * Description: Simplifies creation of HTML files to serve your webpack bundles.
-       * This is especially useful for webpack bundles that include a hash in the filename
-       * which changes every compilation.
+       * 引入静态资源
        *
-       * See: https://github.com/ampedandwired/html-webpack-plugin
+       * 文档参考: https://github.com/ampedandwired/html-webpack-plugin
        */
       new HtmlWebpackPlugin({
         template: 'src/index.html',
@@ -315,7 +321,7 @@ module.exports = function (options) {
        * Description: Enhances html-webpack-plugin functionality
        * with different deployment options for your scripts including:
        *
-       * See: https://github.com/numical/script-ext-html-webpack-plugin
+       * 文档参考: https://github.com/numical/script-ext-html-webpack-plugin
        */
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer'
@@ -398,7 +404,7 @@ module.exports = function (options) {
      * Include polyfills or mocks for various node stuff
      * Description: Node configuration
      *
-     * See: https://webpack.github.io/docs/configuration.html#node
+     * 文档参考: https://webpack.github.io/docs/configuration.html#node
      */
     node: {
       global: true,

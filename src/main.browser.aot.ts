@@ -1,4 +1,5 @@
-/**
+/* 
+ * AOT模式入口 
  * Angular bootstrapping
  */
 import { platformBrowser } from '@angular/platform-browser';
