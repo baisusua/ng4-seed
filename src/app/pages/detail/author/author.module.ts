@@ -13,17 +13,17 @@ import {
 
 import {
     routes
-} from './detail.routes';
+} from './author.routes';
 import {
-    DetailComponent
-} from './detail.component';
+    AuthorComponent
+} from './author.component';
 
 @NgModule({
     declarations: [
         /**
          * Components / Directives/ Pipes
          */
-        DetailComponent,
+        AuthorComponent,
     ],
     imports: [
         CommonModule,
@@ -31,6 +31,6 @@ import {
         RouterModule.forChild(routes),
     ],
 })
-export class DetailModule {
+export class AuthorModule {
     public static routes = routes;
 }

@@ -13,17 +13,17 @@ import {
 
 import {
     routes
-} from './detail.routes';
+} from './comment.routes';
 import {
-    DetailComponent
-} from './detail.component';
+    CommentComponent
+} from './comment.component';
 
 @NgModule({
     declarations: [
         /**
          * Components / Directives/ Pipes
          */
-        DetailComponent,
+        CommentComponent,
     ],
     imports: [
         CommonModule,
@@ -31,6 +31,6 @@ import {
         RouterModule.forChild(routes),
     ],
 })
-export class DetailModule {
+export class CommentModule {
     public static routes = routes;
 }
