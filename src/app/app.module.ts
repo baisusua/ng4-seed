@@ -1,131 +1,137 @@
 import {
-	BrowserModule
+    BrowserModule
 } from '@angular/platform-browser';
 import {
-	FormsModule
+    FormsModule
 } from '@angular/forms';
 import {
-	HttpModule
+    HttpModule
 } from '@angular/http';
 import {
-	NgModule,
-	ApplicationRef
+    NgModule,
+    ApplicationRef
 } from '@angular/core';
 import {
-	removeNgStyles,
-	createNewHosts,
-	createInputTransfer
+    removeNgStyles,
+    createNewHosts,
+    createInputTransfer
 } from '@angularclass/hmr';
 import {
-	RouterModule,
-	PreloadAllModules
+    RouterModule,
+    PreloadAllModules
 } from '@angular/router';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
+import{
+    APP_NGRX_IMPORT,
+    APP_NGRX_PROVIDERS
+} from './app.ngrx';
 import {
-	ENV_PROVIDERS
+    ENV_PROVIDERS
 } from './environment';
 import {
-	ROUTES
+    ROUTES
 } from './app.routes';
 // App is our top level component
 import {
-	IndexComponent
+    IndexComponent
 } from './pages/index';
 import {
-	NoContentComponent
+    NoContentComponent
 } from './pages/no-content';
 import {
-	AppService,
-	InternalStateType
+    AppService,
+    InternalStateType
 } from './app.service';
 
 interface StoreType {
-	restoreInputValues: () => void;
-	disposeOldHosts: () => void;
+    restoreInputValues: () => void;
+    disposeOldHosts: () => void;
 }
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-	bootstrap: [IndexComponent],
-	declarations: [
-		IndexComponent,
-		NoContentComponent
-	],
-	/**
-	 * Import Angular's modules.
-	 */
-	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpModule,
-		RouterModule.forRoot(ROUTES, {
-			useHash: true,
-			preloadingStrategy: PreloadAllModules
-		})
-	],
-	/**
-	 * Expose our Services and Providers into Angular's dependency injection.
-	 */
-	providers: [
-		ENV_PROVIDERS,
-		AppService
-	]
+    bootstrap: [IndexComponent],
+    declarations: [
+        IndexComponent,
+        NoContentComponent
+    ],
+    /**
+     * Import Angular's modules.
+     */
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot(ROUTES, {
+            useHash: true,
+            preloadingStrategy: PreloadAllModules
+        }),
+        APP_NGRX_IMPORT
+    ],
+    /**
+     * Expose our Services and Providers into Angular's dependency injection.
+     */
+    providers: [
+        ENV_PROVIDERS,
+        AppService,
+        APP_NGRX_PROVIDERS
+    ]
 })
 export class AppModule {
 
-	constructor(
-		public appRef: ApplicationRef,
-		public appState: AppService
-	) {}
+    constructor(
+        public appRef: ApplicationRef,
+        public appState: AppService
+    ) {}
 
-	public hmrOnInit(store: StoreType) {
-		// if (!store || !store.state) {
-		// 	return;
-		// }
-		// console.log('HMR store', JSON.stringify(store, null, 2));
-		// /**
-		//  * Set state
-		//  */
-		// this.appState._state = store.state;
-		// /**
-		//  * Set input values
-		//  */
-		// if ('restoreInputValues' in store) {
-		//     const restoreInputValues = store.restoreInputValues;
-		//     setTimeout(restoreInputValues);
-		// }
+    public hmrOnInit(store: StoreType) {
+        // if (!store || !store.state) {
+        // 	return;
+        // }
+        // console.log('HMR store', JSON.stringify(store, null, 2));
+        // /**
+        //  * Set state
+        //  */
+        // this.appState._state = store.state;
+        // /**
+        //  * Set input values
+        //  */
+        // if ('restoreInputValues' in store) {
+        //     const restoreInputValues = store.restoreInputValues;
+        //     setTimeout(restoreInputValues);
+        // }
 
-		// this.appRef.tick();
-		// delete store.state;
-		// delete store.restoreInputValues;
-	}
+        // this.appRef.tick();
+        // delete store.state;
+        // delete store.restoreInputValues;
+    }
 
-	public hmrOnDestroy(store: StoreType) {
-		const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-		/**
-		 * Recreate root elements
-		 */
-		store.disposeOldHosts = createNewHosts(cmpLocation);
-		/**
-		 * Save input values
-		 */
-		// store.restoreInputValues = createInputTransfer();
-		/**
-		 * Remove styles
-		 */
-		removeNgStyles();
-	}
+    public hmrOnDestroy(store: StoreType) {
+        const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
+        /**
+         * Recreate root elements
+         */
+        store.disposeOldHosts = createNewHosts(cmpLocation);
+        /**
+         * Save input values
+         */
+        // store.restoreInputValues = createInputTransfer();
+        /**
+         * Remove styles
+         */
+        removeNgStyles();
+    }
 
-	public hmrAfterDestroy(store: StoreType) {
-		/**
-		 * Display new elements
-		 */
-		store.disposeOldHosts();
-		delete store.disposeOldHosts;
-	}
+    public hmrAfterDestroy(store: StoreType) {
+        /**
+         * Display new elements
+         */
+        store.disposeOldHosts();
+        delete store.disposeOldHosts;
+    }
 
 }

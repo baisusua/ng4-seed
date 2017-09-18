@@ -18,6 +18,8 @@ import {
     BooksComponent
 } from './books.component';
 
+/* 页面服务部分 */
+
 @NgModule({
     declarations: [
         /**
@@ -28,8 +30,8 @@ import {
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule.forChild(routes),
-    ],
+        RouterModule.forChild(routes)
+    ]
 })
 export class BooksModule {
     public static routes = routes;
