@@ -56,6 +56,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-qiniu": "^0.2.4",
     "gulp-replace": "^0.6.1",
+    "gulp-sequence": "^0.4.6",
     "gulp-util": "^3.0.8",
     "html-loader": "^0.5.1",
     "http-server": "^0.9.0",

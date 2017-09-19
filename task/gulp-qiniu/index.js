@@ -25,10 +25,10 @@ gulp.task('upload', function () {
             bucket: config[type].bk,
             private: false
         }, {
-            dir: 'iAPP-general/' + config.v + '/',
+            dir: config[type].dirname + '/' + config.v + '/',
             versioning: false,
             versionFile: './config/images/images.json',
-            ignore: ['*.yml','Dockerfile','./deploy/**','*.md','hosts'],
+            ignore: ['*.yml', 'Dockerfile', './deploy/**', '*.md', 'hosts'],
             concurrent: 10
         }))
 })
@@ -36,6 +36,6 @@ gulp.task('upload', function () {
 /*替换固定的静态资源*/
 gulp.task('replace', function () {
     return gulp.src('./dist/index.html')
-        .pipe(replace('/assets/', config[type].url + config.v + '/assets/'))
+        // .pipe(replace('/assets/', config[type].url + config.v + '/assets/'))
         .pipe(gulp.dest('./dist/'));
 })
