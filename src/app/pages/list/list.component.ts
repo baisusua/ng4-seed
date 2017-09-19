@@ -11,7 +11,7 @@ import {
 export class ListComponent implements OnInit {
 
     public ngOnInit() {
-        console.log('列表页面初始化完成');
+        console.log('列表页面初始化完成11111');
     }
 
 }
