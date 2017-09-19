@@ -1,0 +1,27 @@
+{
+    "dev": {
+        "url": "http://odyehxxr5.bkt.clouddn.com/iAPP-general/",
+        "ak": "xKzCfC_k6hj-7QN_wBwKiSigawkqutKmh280cH8-",
+        "sk": "wDiJw747BkWM_TuJtlr_1IQbf8RAeVYHsxr0rPGp",
+        "bk": "jtest",
+        "remote": "http://yuankang@ssh-gitlab.jpushoa.com/frontend-publish/ng2-iAPP-general.git",
+        "branch": "dev",
+        "api": "http://test-iappweb.jpushoa.com/v1/iapp",
+        "track_url": "https://statdy7dy.jiguang.cn/",
+        "track_id": "9",
+        "env": "dev"
+    },
+    "product": {
+        "url": "https://o8ci6tgz8.qnssl.com/iAPP-general/",
+        "ak": "IIVBbf5jSkJztYBmHh58G8IKjXlGo3P3U0lpgISN",
+        "sk": "CyWFD2tCfnnocqP16Js3IrOnYFW4m5ZXJsuWhmuk",
+        "bk": "wwwpic",
+        "remote": "http://yuankang@ssh-gitlab.jpushoa.com/frontend-publish/ng2-iAPP-general.git",
+        "branch": "master",
+        "api": "https://api.srv.jpush.cn/v1/iapp",
+        "track_url": "https://statdy7dy.jiguang.cn/",
+        "track_id": "11",
+        "env": "product"
+    },
+    "v": "0.0.1"
+}
