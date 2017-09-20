@@ -10,4 +10,4 @@ karma测试
 /**
  * Look in ./config for karma.conf.js
  */
-module.exports = require('./config/karma.conf.js');
+module.exports = require('./task/karma.conf.js');
