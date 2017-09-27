@@ -35,9 +35,9 @@ module.exports = function (env) {
 		port: PORT,
 		ENV: env,
 		HMR: false,
-		API:API,
-		TRACK_URL:TRACK_URL,
-		TRACK_ID:TRACK_ID
+		API: API,
+		TRACK_URL: TRACK_URL,
+		TRACK_ID: TRACK_ID
 	});
 
 	return webpackMerge(commonConfig({
@@ -46,30 +46,28 @@ module.exports = function (env) {
 		devtool: 'source-map',
 		output: {
 			path: helpers.root('dist'),
-			publicPath: config[env].url + config.v + '/',
+			publicPath: config[env].url + config[env].dirname + '/' + config.v + '/',
 			filename: '[name].[chunkhash:8].bundle.js',
 			sourceMapFilename: '[file].map',
 			chunkFilename: '[name].[chunkhash:8].chunk.js'
 
 		},
 		module: {
-			rules: [
-				{
-					test: /\.css$/,
-					loader: ExtractTextPlugin.extract({
-						fallback: 'style-loader',
-						use: 'css-loader'
-					}),
-					include: [helpers.root('src', 'styles')]
-				},{
-					test: /\.scss$/,
-					loader: ExtractTextPlugin.extract({
-						fallback: 'style-loader',
-						use: 'css-loader!sass-loader'
-					}),
-					include: [helpers.root('src', 'styles')]
-				},
-			]
+			rules: [{
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader'
+				}),
+				include: [helpers.root('src', 'styles')]
+			}, {
+				test: /\.scss$/,
+				loader: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader!sass-loader'
+				}),
+				include: [helpers.root('src', 'styles')]
+			}, ]
 		},
 		plugins: [
 			new OptimizeJsPlugin({

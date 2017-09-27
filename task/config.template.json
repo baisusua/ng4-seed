@@ -1,7 +1,7 @@
 {
     "dev": {
-        "url": "http://xxxxx/ng4/",
-        "dirname": "ng4",
+        "url": "http://xxxxx/",
+        "dirname": "ng4-dev",
         "ak": "xxxxx",
         "sk": "xxxx",
         "bk": "xxx",
@@ -13,8 +13,8 @@
         "env": "dev"
     },
     "product": {
-        "url": "https://xxxxxxx/ng4/",
-        "dirname": "ng4",
+        "url": "https://xxxxxxx/",
+        "dirname": "ng4-product",
         "ak": "xxxxx",
         "sk": "xxxxxx",
         "bk": "xxxx",
