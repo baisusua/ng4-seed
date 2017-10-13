@@ -25,5 +25,5 @@ export const APP_NGRX_IMPORT = [
         ListBooksReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
-    EffectsModule.forRoot([ListBooksEffect]),
+    EffectsModule.forRoot([ListBooksEffect])
 ];

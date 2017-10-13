@@ -9,4 +9,4 @@ protractorUI测试
 /**
  * look in ./config for protractor.conf.js
  */
-exports.config = require('./config/protractor.conf.js').config;
+exports.config = require('./task/protractor.conf.js').config;
