@@ -12,11 +12,6 @@ import {
     ApplicationRef
 } from '@angular/core';
 import {
-    removeNgStyles,
-    createNewHosts,
-    createInputTransfer
-} from '@angularclass/hmr';
-import {
     RouterModule,
     PreloadAllModules
 } from '@angular/router';
@@ -76,56 +71,4 @@ interface StoreType {
     ]
 })
 export class AppModule {
-
-    constructor(
-        public appRef: ApplicationRef,
-        public appState: AppService
-    ) {}
-
-    public hmrOnInit(store: StoreType) {
-        // if (!store || !store.state) {
-        // 	return;
-        // }
-        // console.log('HMR store', JSON.stringify(store, null, 2));
-        // /**
-        //  * Set state
-        //  */
-        // this.appState._state = store.state;
-        // /**
-        //  * Set input values
-        //  */
-        // if ('restoreInputValues' in store) {
-        //     const restoreInputValues = store.restoreInputValues;
-        //     setTimeout(restoreInputValues);
-        // }
-
-        // this.appRef.tick();
-        // delete store.state;
-        // delete store.restoreInputValues;
-    }
-
-    public hmrOnDestroy(store: StoreType) {
-        const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-        /**
-         * Recreate root elements
-         */
-        store.disposeOldHosts = createNewHosts(cmpLocation);
-        /**
-         * Save input values
-         */
-        // store.restoreInputValues = createInputTransfer();
-        /**
-         * Remove styles
-         */
-        removeNgStyles();
-    }
-
-    public hmrAfterDestroy(store: StoreType) {
-        /**
-         * Display new elements
-         */
-        store.disposeOldHosts();
-        delete store.disposeOldHosts;
-    }
-
 }
