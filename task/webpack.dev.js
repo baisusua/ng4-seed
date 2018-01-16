@@ -7,42 +7,8 @@ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const EvalSourceMapDevToolPlugin = require('webpack/lib/EvalSourceMapDevToolPlugin');
 
-
 const config = require('./config.json');
-/*
- * Webpack 环境变量
- */
-// const ENV = process.env.ENV = process.env.NODE_ENV = 'dev';
-// const HOST = process.env.HOST || '0.0.0.0';
-// const PORT = process.env.PORT || 4000;
-// const API = process.env.API || config[ENV].api;
-// const TRACK_URL = process.env.TRACK_URL || config[ENV].track_url;
-// const TRACK_ID = process.env.TRACK_ID || config[ENV].track_id;
-// const HMR = helpers.hasProcessFlag('hot');
-// const METADATA = webpackMerge(commonConfig({
-// 	env: ENV
-// }).metadata, {
-// 	host: HOST,
-// 	port: PORT,
-// 	ENV: ENV,
-// 	HMR: HMR,
-// 	API: API,
-// 	TRACK_URL: TRACK_URL,
-// 	TRACK_ID: TRACK_ID
-// });
 
-
-// const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
-
-
-
-
-
-/**
- * Webpack configuration
- *
- * See: http://webpack.github.io/docs/configuration.html#cli
- */
 module.exports = function (options) {
 	const ENV = process.env.ENV = process.env.NODE_ENV = 'dev';
 	const HOST = process.env.HOST || 'localhost';
@@ -88,11 +54,11 @@ module.exports = function (options) {
 		plugins: [
 			new DefinePlugin({
 				'ENV': JSON.stringify(METADATA.ENV),
-				'HMR': METADATA.HMR,
+				'HMR': true,
 				'process.env': {
 					'ENV': JSON.stringify('local'),
-					'NODE_ENV': JSON.stringify(METADATA.ENV),
-					'HMR': JSON.stringify(METADATA.HMR),
+					'NODE_ENV': JSON.stringify('local'),
+					'HMR': true,
 					'API': JSON.stringify(config[METADATA.ENV].API),
 					'TRACK_URL': JSON.stringify(config[METADATA.ENV].TRACK_URL),
 					'TRACK_ID': JSON.stringify(config[METADATA.ENV].TRACK_URL)

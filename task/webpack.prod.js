@@ -1,144 +1,106 @@
-/*
- * Webpack 生产模式配置
- */
-
 const helpers = require('./helpers');
+const buildUtils = require('./build-utils');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 
-/**
- * Webpack 插件
- */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HashedModuleIdsPlugin = require('webpack/lib/HashedModuleIdsPlugin')
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
-const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-const OptimizeJsPlugin = require('optimize-js-plugin');
+const PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = require('./config.json');
 
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
-
 module.exports = function (env) {
-	const API = process.env.API || config[env].api;
-	const TRACK_URL = process.env.TRACK_URL || config[env].track_url;
-	const TRACK_ID = process.env.TRACK_ID || config[env].track_id;
-	const METADATA = webpackMerge(commonConfig({
-		env: env
-	}).metadata, {
-		host: HOST,
-		port: PORT,
+	const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
+		isDevServer: false,
+		AOT: true,
+		WATCH: false,
 		ENV: env,
 		HMR: false,
-		API: API,
-		TRACK_URL: TRACK_URL,
-		TRACK_ID: TRACK_ID
+		envFileSuffix: true
 	});
-
 	return webpackMerge(commonConfig({
-		env: env
+		env: env,
+		metadata: METADATA
 	}), {
-		devtool: 'source-map',
 		output: {
 			path: helpers.root('dist'),
 			publicPath: config[env].url + config[env].dirname + '/' + config.v + '/',
 			filename: '[name].[chunkhash:8].bundle.js',
 			sourceMapFilename: '[file].map',
 			chunkFilename: '[name].[chunkhash:8].chunk.js'
-
 		},
 		module: {
 			rules: [{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader'
-				}),
-				include: [helpers.root('src', 'styles')]
-			}, {
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader!sass-loader'
-				}),
-				include: [helpers.root('src', 'styles')]
-			}, ]
+					test: /\.css$/,
+					loader: ExtractTextPlugin.extract({
+						fallback: 'style-loader',
+						use: 'css-loader'
+					}),
+					include: [helpers.root('src', 'styles')]
+				},
+				{
+					test: /\.scss$/,
+					loader: ExtractTextPlugin.extract({
+						fallback: 'style-loader',
+						use: 'css-loader!sass-loader'
+					}),
+					include: [helpers.root('src', 'styles')]
+				},
+
+			]
+
 		},
 		plugins: [
-			new OptimizeJsPlugin({
-				sourceMap: false
+			new DefinePlugin({
+				'ENV': JSON.stringify(env),
+				'HMR': false,
+				'process.env': {
+					'ENV': JSON.stringify(config[env].ENV),
+					'NODE_ENV': JSON.stringify(config[env].ENV),
+					'HMR': false,
+					'API': JSON.stringify(config[env].API),
+					'TRACK_URL': JSON.stringify(config[env].TRACK_URL),
+					'TRACK_ID': JSON.stringify(config[env].TRACK_ID)
+				}
+			}),
+			new SourceMapDevToolPlugin({
+				filename: '[file].map[query]',
+				moduleFilenameTemplate: '[resource-path]',
+				fallbackModuleFilenameTemplate: '[resource-path]?[hash]',
+				sourceRoot: 'webpack:///'
 			}),
 			new ExtractTextPlugin('[name].[contenthash:8].css'),
-			new DefinePlugin({
-				'ENV': JSON.stringify(METADATA.ENV),
-				'HMR': METADATA.HMR,
-				'process.env': {
-					'ENV': JSON.stringify(METADATA.ENV),
-					'NODE_ENV': JSON.stringify(METADATA.ENV),
-					'HMR': METADATA.HMR,
-					'API': JSON.stringify(METADATA.API),
-					'TRACK_URL': JSON.stringify(METADATA.TRACK_URL),
-					'TRACK_ID': JSON.stringify(METADATA.TRACK_ID)
-				}
-			}),
-			new UglifyJsPlugin({
-				beautify: false, //prod
-				output: {
-					comments: false
-				}, //prod
-				mangle: {
-					screw_ie8: true
-				}, //prod
-				compress: {
-					screw_ie8: true,
-					warnings: false,
-					conditionals: true,
-					unused: true,
-					comparisons: true,
-					sequences: true,
-					dead_code: true,
-					evaluate: true,
-					if_return: true,
-					join_vars: true,
-					negate_iife: false // we need this for lazy v8
-				},
-			}),
-			new NormalModuleReplacementPlugin(
-				/angular2-hmr/,
-				helpers.root('task/empty.js')
-			),
-			new NormalModuleReplacementPlugin(
-				/zone\.js(\\|\/)dist(\\|\/)long-stack-trace-zone/,
-				helpers.root('task/empty.js')
-			),
+
+			new PurifyPlugin(), /* buildOptimizer */
+
 			new HashedModuleIdsPlugin(),
-			new LoaderOptionsPlugin({
-				minimize: true,
-				debug: false,
-				options: {
-					htmlLoader: {
-						minimize: true,
-						removeAttributeQuotes: false,
-						caseSensitive: true,
-						customAttrSurround: [
-							[/#/, /(?:)/],
-							[/\*/, /(?:)/],
-							[/\[?\(?/, /(?:)/]
-						],
-						customAttrAssign: [/\)?\]?=/]
+			new ModuleConcatenationPlugin(),
+			new UglifyJsPlugin({
+				sourceMap: true,
+				uglifyOptions: {
+					ecma: 5,
+					warnings: false, // TODO verbose based on option?
+					ie8: false,
+					mangle: true,
+					compress: {
+						pure_getters: true,
+						passes: 3
 					},
+					output: {
+						ascii_only: true,
+						comments: false
+					}
 				}
-			}),
+			})
 		],
 		node: {
 			global: true,
 			crypto: 'empty',
-			process: true,
+			process: false,
 			module: false,
 			clearImmediate: false,
 			setImmediate: false

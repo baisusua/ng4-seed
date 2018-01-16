@@ -25,8 +25,14 @@ function getEnvFile(status) {
     if (status) {
         fileName = helpers.root(`src/environments/environment.prod.ts`);
     }
-
-    return fileName;
+    if (fs.existsSync(fileName)) {
+        return fileName;
+      } else if (fs.existsSync(fileName = helpers.root('src/environments/environment.ts'))) {
+        console.warn(`Could not find environment file , loading default environment file`);
+        return fileName;
+      } else {
+        throw new Error('Environment file not found.')
+      }
 }
 
 function ngcWebpackSetup(prod, metadata) {
