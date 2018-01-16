@@ -24,10 +24,6 @@ import {
 /*
  * Platform and Environment providers/directives/pipes
  */
-import{
-    APP_NGRX_IMPORT,
-    APP_NGRX_PROVIDERS
-} from './app.ngrx';
 import {
     ENV_PROVIDERS
 } from './environment';
@@ -69,16 +65,14 @@ interface StoreType {
         RouterModule.forRoot(ROUTES, {
             useHash: true,
             preloadingStrategy: PreloadAllModules
-        }),
-        APP_NGRX_IMPORT
+        })
     ],
     /**
      * Expose our Services and Providers into Angular's dependency injection.
      */
     providers: [
         ENV_PROVIDERS,
-        AppService,
-        APP_NGRX_PROVIDERS
+        AppService
     ]
 })
 export class AppModule {
