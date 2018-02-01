@@ -2,7 +2,8 @@ import {
     Routes
 } from '@angular/router';
 import {
-    IndexComponent
+    IndexComponent,
+    CheckService
 } from './pages/index';
 import {
     DetailComponent
@@ -18,6 +19,16 @@ import {
 export const ROUTES: Routes = [{
         path: 'list',
         loadChildren: './pages/list#ListModule'
+    },
+    {
+        path: 'ngrx',
+        canActivate: [CheckService],
+        loadChildren: './pages/ngrx#NgrxModule'
+    },
+    {
+        path: 'mobx',
+        canActivate: [CheckService],
+        loadChildren: './pages/mobx#MobxModule'
     },
     {
         path: 'detail/:id',

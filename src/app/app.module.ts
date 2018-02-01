@@ -28,7 +28,9 @@ import {
 
 // App is our top level component
 import {
-    IndexComponent
+    IndexComponent,
+    CheckService,
+    StatusService
 } from './pages/index';
 import {
     DetailComponent
@@ -73,8 +75,9 @@ interface StoreType {
         CheckboxModule
     ],
     providers: [
-        AppService
+        AppService,
+        CheckService,
+        StatusService
     ]
 })
-export class AppModule {
-}
+export class AppModule {}
