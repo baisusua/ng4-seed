@@ -1,7 +1,7 @@
 {
     "dev": {
         "url": "http://xxxxx/",
-        "dirname": "ng4-dev",
+        "dirname": "ng5-dev",
         "ak": "xxxxx",
         "sk": "xxxx",
         "bk": "xxx",
@@ -14,7 +14,7 @@
     },
     "product": {
         "url": "https://xxxxxxx/",
-        "dirname": "ng4-product",
+        "dirname": "ng5-product",
         "ak": "xxxxx",
         "sk": "xxxxxx",
         "bk": "xxxx",
@@ -25,5 +25,5 @@
         "track_id": "xxxx",
         "env": "product"
     },
-    "v": "0.0.1"
+    "v": "0.1.0"
 }

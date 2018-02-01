@@ -1,6 +1,6 @@
 #Angular4单页面应用实例
 
-> [Angular4 文档地址](https://angular.io/docs)
+> [Angular5 文档地址](https://angular.io/docs)
 
 > [Webpack2 文档地址](http://webpack.github.io/)
 
@@ -8,40 +8,40 @@
 
 >默认使用AOT模式
 
->推荐使用 [ngrx](https://github.com/ngrx/platform) 来管理应用状态
+>默认加载极光内部组件库 [jui]()
+
+>推荐使用 [mobx-angular](https://github.com/mobxjs/mobx-angular) 来管理应用状态
+
+>新版ngrx写法太繁琐，所以放弃了使用ngrx，关于ngrx的部分请参考ngrx-page目录以及app.module.ts文件相关部分
 
 >建议搭配 [ng4-tool](https://www.npmjs.com/package/ng4-tool) 使用
-
->angular2 [填充库](https://angular.cn/docs/ts/latest/guide/browser-support.html) 配置文件：`src/polyfill.browser.ts`
-
->暂时只支持单元测试模式~
 
 >项目构建相关文件统一放在 `task` 目录下
 
 开发模式
 
-* 使用dll插件提升构建速度
 * 默认开启热加载模式
-* 使用 `npm run start` 命令进入开发模式
+* 使用 `npm run start` 
+* 本地默认注入环境参数为 `local`
 
 生产模式
 
 * 默认使用hash路由风格
 * 使用Webpack编译文件
 * 使用Gulp发布文件
-* 通过push触发部署脚本自动部署
+* 默认使用七牛云部署静态资源(js、css、img)
+* 通过push触发部署脚本自动部署(默认只上传index.html以及部分部署脚本)
 
 ## 目录结构
 ```
-angular4-seed/
+angular5-seed/
  │──task/                          * 项目构建任务
  │   │config.json                * 项目构建配置
  │   ├── ~/                        * 其它文件
  │
  │──src/                             * 项目代码
- │   ├──main.browser.ts                      * 开发入口
+ │   ├──main.browser.ts                      * 项目入口
  │   │
- │   ├──main.browser.aot.ts                * 生产入口
  │   │
  │   ├──index.html                               * html模板
  │   │
@@ -56,7 +56,7 @@ angular4-seed/
  │   │   ├──app.routes.ts                      * 根路由（路由需要依赖组件，故暂时与模块文件放在一起）
  │   │   ├──app.ngrx.ts                         * ngrx相关部分
  │   │   ├──app.providers.ts                 * service相关部分
- │   │   ├──environment.ts                   * 环境配置
+ │   │   ├──environment                   * 环境配置
  │   │   ├──common/                           * 项目公共部分
  │   │   └──pages/                 				  * 项目页面
  │   │
@@ -72,7 +72,7 @@ angular4-seed/
 ## 开发
 * `npm install`
 * `npm run start`（默认读取`task/config.json`中dev的api配置）
-* `http://localhost:3000`
+* `http://localhost:4000`
 
 ## 发布
 * 在 `task/config.json` 中配置环境A
