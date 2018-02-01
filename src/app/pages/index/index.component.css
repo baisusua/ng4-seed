@@ -1,13 +1,30 @@
+.Index-warp{
+    padding: 30px;
+}
 .Index-title {
     font-size: 32px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     color: #333333;
 }
-
 .Index-tips {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 30px;
+    color: orangered;
+}
+.Index-tips>span{
+    color:orangered;
+}
+.Index-active{
+    color: orangered!important;
+}
+.Index-link-item{
+    margin-right: 20px;
+}
+.Index-link{
     color: #666666;
+}
+.Index-link:hover{
+    color: green;
+}
+.Index-controll{
+    margin: 30px 0px;
 }

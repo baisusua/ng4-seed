@@ -1,3 +1,24 @@
-.list-books{
+.books-title{
+    margin: 30px 0px;
+    color: #666666;
+    text-align: center;
+}
+.books-item{
+    padding: 10px 0px;
+    border-bottom: 1px solid #ebebec;
+    font-size: 12px;
+    text-align: center;
+}
+.books-item:first-child{
+    background-color: #ebebec;
+}
+.books-name{
+    width: 100px;
+    color: #666666;
+}
+.books-link{
+    color: #666666;
+}
+.books-link:hover{
     color: green;
 }

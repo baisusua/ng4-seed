@@ -1,0 +1,24 @@
+.movies-title{
+    margin: 30px 0px;
+    color: #666666;
+    text-align: center;
+}
+.movies-item{
+    padding: 10px 0px;
+    border-bottom: 1px solid #ebebec;
+    font-size: 12px;
+    text-align: center;
+}
+.movies-item:first-child{
+    background-color: #ebebec;
+}
+.movies-name{
+    width: 100px;
+    color: #666666;
+}
+.movies-link{
+    color: #666666;
+}
+.movies-link:hover{
+    color: green;
+}

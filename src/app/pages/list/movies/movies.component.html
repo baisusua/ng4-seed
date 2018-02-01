@@ -1,3 +1,15 @@
 <div>
-    <h1>这里是电影页面</h1>
+    <h1 class="movies-title">电影列表(movies)</h1>
+    <div class="movies-warp">
+        <div class="movies-item db ba-c bp-j">
+            <div class="movies-name">电影名称</div>
+            <div class="movies-name">电影ID</div>
+            <div class="movies-name">电影详情</div>
+        </div>
+        <div *ngFor="let movie of list;let i = index;" class="movies-item db ba-c bp-j">
+            <div class="movies-name">{{movie.name+'-'+i}}</div>
+            <div class="movies-name">{{i}}</div>
+            <div class="movies-name"><a class="movies-link" [routerLink]="['/','detail',i]"  [queryParams]="{name:movie.name+'-'+i}" class="movies-link">详情</a></div>
+        </div>
+    </div>
 </div>

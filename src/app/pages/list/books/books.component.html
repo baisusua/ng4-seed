@@ -1,3 +1,15 @@
 <div>
-    <h1 class="list-books">这里是书页面</h1>
+    <h1 class="books-title">书籍列表(books)</h1>
+    <div class="books-warp">
+        <div class="books-item db ba-c bp-j">
+            <div class="books-name">书籍名称</div>
+            <div class="books-name">书籍ID</div>
+            <div class="books-name">书籍详情</div>
+        </div>
+        <div *ngFor="let book of list;let i = index;" class="books-item db ba-c bp-j">
+            <div class="books-name">{{book.name+'-'+i}}</div>
+            <div class="books-name">{{i}}</div>
+            <div class="books-name"><a class="books-link" [routerLink]="['/','detail',i]"  [queryParams]="{name:book.name+'-'+i}" class="books-link">详情</a></div>
+        </div>
+    </div>
 </div>

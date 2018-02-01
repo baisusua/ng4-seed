@@ -2,13 +2,13 @@
 
 > [Angular5 文档地址](https://angular.io/docs)
 
-> [Webpack2 文档地址](http://webpack.github.io/)
+> [Webpack3 文档地址](https://webpack.js.org/api/)
 
 > 项目基于 [angular2-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter) 进行构建，更多细节和构建方案请参考 [angular2-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter) 项目
 
 >默认使用AOT模式
 
->默认加载极光内部组件库 [jui]()
+>默认加载极光内部组件库 [jpush-ui](https://www.npmjs.com/package/jpush-ui)
 
 >推荐使用 [mobx-angular](https://github.com/mobxjs/mobx-angular) 来管理应用状态
 

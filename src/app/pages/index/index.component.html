@@ -1,6 +1,29 @@
 <div class="Index-warp">
-    <div class="Index-title">NG4-NEW-SEED</div>
-    <div class="Index-tips">当前组件：list</div>
+    <div class="Index-title">NG5-NEW-SEED</div>
+    <div class="db ba-c bp-j">
+        <div class="Index-link-warp db ba-c">
+            <div class="Index-link-item">
+                <a class="Index-link" routerLink="/list" routerLinkActive="Index-active">list页面</a>
+            </div>
+            <div class="Index-link-item">
+                <a class="Index-link" href="">mobx页面</a>
+            </div>
+            <div class="Index-link-item">
+                <a class="Index-link" href="">ngrx页面</a>
+            </div>
+        </div>
+        <div class="Index-tips">当前组件：
+            <span>{{childname}}</span>
+        </div>
+    </div>
+    <div class="Index-controll db ba-c">
+        <div>
+            <jui-checkbox [checked]="isNgrx" value="on" (check)="onIsNgrx($event)">允许跳转Ngrx</jui-checkbox>
+        </div>
+        <div>
+            <jui-checkbox [checked]="isMobox" value="on" (check)="onIsMobox($event)">允许跳转Mobox</jui-checkbox>
+        </div>
+    </div>
     <div class="Index-child">
         <router-outlet></router-outlet>
     </div>

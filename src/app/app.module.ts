@@ -20,11 +20,12 @@ import {
  * Platform and Environment providers/directives/pipes
  */
 import {
-    ENV_PROVIDERS
-} from './environment';
+    AppService
+} from './app.service';
 import {
     ROUTES
 } from './app.routes';
+
 // App is our top level component
 import {
     IndexComponent
@@ -32,27 +33,31 @@ import {
 import {
     NoContentComponent
 } from './pages/no-content';
+
+/* 
+jpush-ui
+*/
 import {
-    AppService,
-    InternalStateType
-} from './app.service';
+    CheckboxModule
+} from 'jpush-ui/checkbox';
+
+/* 
+static
+*/
+import '../styles/flex.css';
+import "../styles/reset.css";
+
 
 interface StoreType {
     restoreInputValues: () => void;
     disposeOldHosts: () => void;
 }
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
     bootstrap: [IndexComponent],
     declarations: [
         IndexComponent,
         NoContentComponent
     ],
-    /**
-     * Import Angular's modules.
-     */
     imports: [
         BrowserModule,
         FormsModule,
@@ -60,13 +65,10 @@ interface StoreType {
         RouterModule.forRoot(ROUTES, {
             useHash: true,
             preloadingStrategy: PreloadAllModules
-        })
+        }),
+        CheckboxModule
     ],
-    /**
-     * Expose our Services and Providers into Angular's dependency injection.
-     */
     providers: [
-        ENV_PROVIDERS,
         AppService
     ]
 })
