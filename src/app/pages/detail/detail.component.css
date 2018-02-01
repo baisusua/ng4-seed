@@ -1,0 +1,29 @@
+.detail-title{
+    margin: 30px 0px;
+    color: #666666;
+    text-align: center;
+    font-size: 14px !important;
+}
+.detail-box{
+    text-align: left;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #ebebec;
+    font-size: 12px;
+    color: #666666;
+}
+.detail-box-title{
+    margin: 10px;
+}
+.detail-box-title>span{
+    color: #333333;
+    margin-left: 5px;
+}
+.detail-link{
+    color: #666666;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.detail-link:hover{
+    color: green;
+}

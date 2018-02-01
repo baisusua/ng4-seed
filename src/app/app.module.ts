@@ -31,6 +31,9 @@ import {
     IndexComponent
 } from './pages/index';
 import {
+    DetailComponent
+} from './pages/detail';
+import {
     NoContentComponent
 } from './pages/no-content';
 
@@ -56,6 +59,7 @@ interface StoreType {
     bootstrap: [IndexComponent],
     declarations: [
         IndexComponent,
+        DetailComponent,
         NoContentComponent
     ],
     imports: [

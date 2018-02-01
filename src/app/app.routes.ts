@@ -5,6 +5,9 @@ import {
     IndexComponent
 } from './pages/index';
 import {
+    DetailComponent
+}from './pages/detail';
+import {
     NoContentComponent
 } from './pages/no-content';
 
@@ -17,8 +20,8 @@ export const ROUTES: Routes = [{
         loadChildren: './pages/list#ListModule'
     },
     {
-        path: 'detail',
-        loadChildren: './pages/detail#DetailModule'
+        path: 'detail/:id',
+        component:DetailComponent
     },
     {
         path: '**',

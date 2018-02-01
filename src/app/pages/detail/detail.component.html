@@ -1,6 +1,13 @@
 <div>
-    <h1>这是详情页面</h1>
-    <div>
-        <router-outlet></router-outlet>
+   <div class="db ba-c bp-c">
+       <div> <h1 class="detail-title">这是详情页面</h1></div>
+       <div><a class="detail-link" [routerLink]="['/','list',link,'topicId']">返回列表</a></div>
+   </div>
+    <div class="detail-content db bp-c">
+        <div class="detail-box">
+            <div class="detail-box-title">类别：<span>{{type}}</span></div>
+            <div class="detail-box-title">名称：<span>{{name}}</span></div>
+            <div class="detail-box-title">{{type}}ID：<span>{{id}}</span></div>
+        </div>
     </div>
 </div>
