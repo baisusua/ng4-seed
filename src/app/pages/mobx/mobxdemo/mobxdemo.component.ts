@@ -20,9 +20,17 @@ export class MobxDemoComponent implements OnInit {
         console.log('mobxDemo页面初始化完成');
         /* 获取用户信息 */
     }
-    public add(){
+    public addGeneral(){
         if(this.name){
-            this.mobxStore.add(this.name);
+            this.mobxStore.addGeneral(this.name);
+        }else{
+            alert('请输入值');
+        }
+    }
+    public addAsync(){
+        if(this.name){
+            alert('点击确定，3秒后将添加'+this.name+'数据');
+            this.mobxStore.addAsync(this.name);
         }else{
             alert('请输入值');
         }
