@@ -63,6 +63,7 @@
     "last": "^1.1.0",
     "mobx": "^3.4.1",
     "mobx-angular": "^2.1.1",
+    "mobx-remotedev": "^0.2.8",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.6",
     "save-dev": "^2.0.0",

@@ -10,7 +10,12 @@ import {
 import {
     RouterModule
 } from '@angular/router';
-
+import{
+    InputModule
+}from'jpush-ui/input';
+import{
+    ButtonModule
+}from'jpush-ui/button'
 import {
     routes
 } from './demo.routes';
@@ -30,6 +35,8 @@ import {
     imports: [
         CommonModule,
         FormsModule,
+        InputModule,
+        ButtonModule,
         RouterModule.forChild(routes)
     ]
 })

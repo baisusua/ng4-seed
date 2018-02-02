@@ -1,6 +1,24 @@
 <div>
-    <h1 class="list-title">这是mobxDemo页面</h1>
-    <div>
-        <router-outlet></router-outlet>
+    <h1 class="mobx-title">mobx演示页面</h1>
+    <div class="mobx-child db ba-c">
+        <div>Demo操作区域</div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="mobx-list">
+        <div class="mobx-item db ba-c bp-j">
+            <div class="mobx-name">数据名称</div>
+            <div class="mobx-name">数据ID</div>
+            <div class="mobx-name">操作</div>
+        </div>
+        <div *ngFor="let item of mobxStore.total;let i = index;" class="mobx-item db ba-c bp-j">
+            <div class="mobx-name">{{item}}</div>
+            <div class="mobx-name">{{i}}</div>
+            <div class="mobx-name">
+                <button (click)="delete(i);" jui-btn btnType="danger" btnSize="small">删除</button>
+            </div>
+        </div>
+        <div *ngIf="mobxStore.total.length==0" class="mobx-list-nodata">暂无数据，请添加数据</div>
     </div>
 </div>

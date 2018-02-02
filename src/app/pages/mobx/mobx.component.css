@@ -1,0 +1,33 @@
+.mobx-title{
+    color: #666666;
+    text-align: center;
+    margin: 30px;
+}
+.mobx-item{
+    padding: 10px 0px;
+    border-bottom: 1px solid #ebebec;
+    font-size: 12px;
+    text-align: center;
+}
+.mobx-item:first-child{
+    background-color: #ebebec;
+}
+.mobx-name{
+    width: 100px;
+    color: #666666;
+}
+.mobx-list-nodata{
+    padding: 30px;
+    border-bottom: 1px solid #ebebec;
+    color: #666666;
+    text-align: center;
+    font-size: 14px;
+}
+.mobx-child{
+    margin-bottom: 30px;
+}
+.mobx-child>div{
+    font-size: 14px;
+    color: #666666;
+    margin-right: 10px;
+}
