@@ -10,13 +10,18 @@ import {
 import {
     RouterModule
 } from '@angular/router';
-
+import{
+    InputModule
+}from'jpush-ui/input';
+import{
+    ButtonModule
+}from'jpush-ui/button'
 import {
     routes
-} from './demo.routes';
+} from './mobxdemo.routes';
 import {
-    DemoComponent
-} from './demo.component';
+    MobxDemoComponent
+} from './mobxdemo.component';
 
 /* 页面服务部分 */
 
@@ -25,14 +30,16 @@ import {
         /**
          * Components / Directives/ Pipes
          */
-        DemoComponent,
+        MobxDemoComponent,
     ],
     imports: [
         CommonModule,
         FormsModule,
+        InputModule,
+        ButtonModule,
         RouterModule.forChild(routes)
     ]
 })
-export class NgrxDemoModule {
+export class MobxDemoModule {
     public static routes = routes;
 }

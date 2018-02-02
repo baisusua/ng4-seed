@@ -21,7 +21,7 @@ import {
 })
 export class IndexComponent implements OnInit {
     public childname: string = 'list组件';
-    public isNgrx: boolean = false;
+    public isNgrx: boolean = true;
     public isMobx: boolean = true;
     constructor(
         public StatusService:StatusService

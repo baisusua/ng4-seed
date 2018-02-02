@@ -9,6 +9,6 @@ export const routes = [{
         path: ''
     }, {
         path: 'demo',
-        loadChildren: './demo#MobxDemoModule'
+        loadChildren: './mobxdemo#MobxDemoModule'
     }]
 }];

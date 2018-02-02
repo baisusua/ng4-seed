@@ -10,6 +10,13 @@ import {
 import {
     RouterModule
 } from '@angular/router';
+import {
+    MobxAngularModule
+} from 'mobx-angular';
+
+import {
+    ButtonModule
+}from 'jpush-ui/button';
 
 import {
     routes
@@ -17,7 +24,9 @@ import {
 import {
     NgrxComponent
 } from './ngrx.component';
-
+import {
+    APP_NGRX_IMPORT
+} from './ngrx.all';
 @NgModule({
     declarations: [
         /**
@@ -28,8 +37,11 @@ import {
     imports: [
         CommonModule,
         FormsModule,
+        MobxAngularModule,
+        ButtonModule,
         RouterModule.forChild(routes),
-    ],
+        APP_NGRX_IMPORT
+    ]
 })
 export class NgrxModule {
     public static routes = routes;

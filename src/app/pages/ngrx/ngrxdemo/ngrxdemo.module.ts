@@ -18,10 +18,10 @@ import{
 }from'jpush-ui/button'
 import {
     routes
-} from './demo.routes';
+} from './ngrxdemo.routes';
 import {
-    DemoComponent
-} from './demo.component';
+    NgrxDemoComponent
+} from './ngrxdemo.component';
 
 /* 页面服务部分 */
 
@@ -30,7 +30,7 @@ import {
         /**
          * Components / Directives/ Pipes
          */
-        DemoComponent,
+        NgrxDemoComponent,
     ],
     imports: [
         CommonModule,
@@ -40,6 +40,6 @@ import {
         RouterModule.forChild(routes)
     ]
 })
-export class MobxDemoModule {
+export class NgrxDemoModule {
     public static routes = routes;
 }

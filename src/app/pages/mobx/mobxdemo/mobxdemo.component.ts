@@ -6,11 +6,10 @@ import{
     MobxStore
 } from '../mobx'
 @Component({
-    selector: 'demo',
-    templateUrl: './demo.component.html',
-    styleUrls: ['./demo.component.css']
+    templateUrl: './mobxdemo.component.html',
+    styleUrls: ['./mobxdemo.component.css']
 })
-export class DemoComponent implements OnInit {
+export class MobxDemoComponent implements OnInit {
     public name:string = '';
     constructor(
         public mobxStore:MobxStore

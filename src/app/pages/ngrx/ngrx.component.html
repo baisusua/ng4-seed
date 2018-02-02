@@ -1,6 +1,24 @@
 <div>
-    <h1 class="list-title">这是ngrxDemo页面</h1>
-    <div>
-        <router-outlet></router-outlet>
+    <h1 class="ngrx-title">ngrx演示页面</h1>
+    <div class="ngrx-child db ba-c">
+        <div>Demo操作区域</div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="ngrx-list">
+        <div class="ngrx-item db ba-c bp-j">
+            <div class="ngrx-name">数据名称</div>
+            <div class="ngrx-name">数据ID</div>
+            <div class="ngrx-name">操作</div>
+        </div>
+        <div *ngFor="let item of list;let i = index;" class="ngrx-item db ba-c bp-j">
+            <div class="ngrx-name">{{item}}</div>
+            <div class="ngrx-name">{{i}}</div>
+            <div class="ngrx-name">
+                <button (click)="delete(i);" jui-btn btnType="danger" btnSize="small">删除</button>
+            </div>
+        </div>
+        <div *ngIf="list.length==0" class="ngrx-list-nodata">暂无数据，请添加数据</div>
     </div>
 </div>
