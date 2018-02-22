@@ -31,6 +31,10 @@ export const ROUTES: Routes = [{
         loadChildren: './pages/mobx#MobxModule'
     },
     {
+        path: 'dob',
+        loadChildren: './pages/dob#DobModule'
+    },
+    {
         path: 'detail/:id',
         component:DetailComponent
     },

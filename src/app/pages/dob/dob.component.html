@@ -1,0 +1,24 @@
+<div>
+    <h1 class="dob-title">dob演示页面</h1>
+    <div class="dob-child db ba-c">
+        <div>Demo操作区域</div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div class="dob-list">
+        <div class="dob-item db ba-c bp-j">
+            <div class="dob-name">数据名称</div>
+            <div class="dob-name">数据ID</div>
+            <div class="dob-name">操作</div>
+        </div>
+        <div *ngFor="let item of store!.BobStore!.list;let i = index;" class="dob-item db ba-c bp-j">
+            <div class="dob-name">{{item}}</div>
+            <div class="dob-name">{{i}}</div>
+            <div class="dob-name">
+                <button (click)="delete(i);" jui-btn btnType="danger" btnSize="small">删除</button>
+            </div>
+        </div>
+        <div *ngIf="store!.BobStore!.list.length==0" class="dob-list-nodata">暂无数据，请添加数据</div>
+    </div>
+</div>
